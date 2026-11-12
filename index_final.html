@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#f5f7fc">
+<meta name="description" content="Creator Toolkit — Instagram-first creator intelligence workspace">
+<title>Creator Toolkit — Intelligence Studio</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap');
+:root{--bg:#f4f6fb;--card:#fff;--ink:#1c2942;--muted:#748198;--line:#e4e9f3;--blue:#5872e8;--blue2:#edf1ff;--shadow:0 14px 40px rgba(39,58,102,.07);--r:22px}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(ellipse at 5% 0%,#e8edff 0,transparent 34%),var(--bg);color:var(--ink);font:15px/1.65 'DM Sans',sans-serif}
+button,input,textarea,select{font:inherit}button{cursor:pointer}.wrap{max-width:1180px;margin:auto;padding:22px 28px 48px}
+header{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px}.brand{font-weight:800;font-size:17px;letter-spacing:-.6px}.brand small{display:block;color:#8c98ad;font:10px 'DM Mono';letter-spacing:2px}.status{font:10px 'DM Mono';color:#4b65ca;background:#eef2ff;border:1px solid #dce4ff;border-radius:30px;padding:8px 12px}
+.hero{background:linear-gradient(120deg,#fff,#f0f4ff 65%,#edf5ff);border:1px solid #e2e9fa;border-radius:28px;padding:36px 38px;margin-bottom:22px;box-shadow:var(--shadow)}
+.eyebrow,.kicker,.mini{font:10px 'DM Mono';letter-spacing:1.7px;text-transform:uppercase;color:#7082ce}.hero h1{font-size:clamp(34px,5vw,56px);line-height:1.08;letter-spacing:-2.5px;margin:12px 0;color:#1c2942}.hero h1 em{font-style:normal;color:var(--blue)}.hero p{color:var(--muted);max-width:690px;margin:0}.principle{border-top:1px solid #dfe6f4;margin-top:23px;padding-top:18px;font:700 21px/1.45 'Playfair Display',serif}.principle small{display:block;font:10px 'DM Mono';letter-spacing:1.5px;color:#8290b1;margin-bottom:7px}
+.tabs{display:flex;gap:8px;overflow-x:auto;overscroll-behavior-x:contain;scrollbar-width:none;padding:8px;background:#fff;border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow);margin-bottom:25px;-webkit-overflow-scrolling:touch}.tabs::-webkit-scrollbar{display:none}.tab{flex:0 0 auto;border:1px solid transparent;background:transparent;color:#66738b;border-radius:13px;padding:12px 15px;font-size:12px;font-weight:700;white-space:nowrap}.tab[aria-selected="true"]{background:var(--blue2);border-color:#dce4ff;color:#405bc7}
+main{min-width:0}.page{display:none}.page.is-active{display:block}.head{display:flex;justify-content:space-between;gap:12px;align-items:flex-start;margin:0 2px 16px}.head h2{font-size:25px;letter-spacing:-.8px;margin:3px 0}.head p{margin:0;color:var(--muted);font-size:13px}.tag{font:10px 'DM Mono';color:#8b96aa;border:1px solid var(--line);border-radius:30px;padding:7px 10px;white-space:nowrap}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:22px;margin-bottom:15px;box-shadow:var(--shadow)}.card h3{font-size:15px;margin:0 0 8px}.card p{color:var(--muted);font-size:12px;margin:0 0 12px}.label{display:block;font-size:12px;font-weight:700;margin:14px 0 7px;color:#53617a}
+input,textarea,select{width:100%;border:1px solid #dfe5f0;border-radius:13px;padding:13px 14px;background:#fff;color:var(--ink);outline:none;font-size:16px;min-width:0}input:focus,textarea:focus,select:focus{border-color:#8195ed;box-shadow:0 0 0 3px #5872e817}textarea{resize:vertical}
+.row{display:flex;gap:9px;align-items:stretch}.row>*{min-width:0}.row input{flex:1}.btn{border:0;border-radius:12px;padding:12px 17px;background:var(--blue);color:white;font-weight:700;font-size:12px;white-space:nowrap}.btn:hover{filter:brightness(.96)}.btn.secondary{background:#eef2ff;color:#4b63c8}.btn.outline{background:#fff;color:#58657b;border:1px solid var(--line)}.btns{display:flex;gap:9px;flex-wrap:wrap;margin-top:13px}
+.note{background:#f5f7fc;border:1px solid #e5eaf5;border-radius:13px;padding:13px 14px;color:#748198;font-size:11px;margin-top:14px}.note strong{color:#465a9c}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.tile{border:1px solid var(--line);border-radius:15px;padding:15px;background:#fff}.tile b{display:block;font-size:12px;margin-bottom:6px}.tile p{font-size:11px;color:var(--muted);margin:0}.metrics{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:14px 0}.metric{border:1px solid var(--line);border-radius:15px;background:#fff;padding:14px;min-width:0}.metric b{display:block;font-size:19px}.metric span{font-size:10px;color:var(--muted)}
+.output{white-space:pre-wrap;background:#f7f8fc;border:1px solid var(--line);border-radius:14px;padding:16px;margin-top:14px;font-size:12px;line-height:1.8}.profile{display:flex;align-items:center;gap:12px;flex-wrap:wrap}.avatar{width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,#e8edff,#dbe5ff);display:grid;place-items:center;color:#4963d0;font-weight:800}.profile-info{flex:1;min-width:140px}.profile-info b{display:block}.profile-info small{color:var(--muted)}.empty{border:1px dashed #d7deeb;border-radius:14px;padding:20px;text-align:center;color:var(--muted);font-size:12px}
+footer{display:flex;justify-content:space-between;gap:12px;color:#98a2b3;font:10px 'DM Mono';padding:18px 3px}
+.toast{position:fixed;left:50%;bottom:22px;transform:translate(-50%,18px);opacity:0;pointer-events:none;background:#202c45;color:white;padding:11px 16px;border-radius:30px;font-size:12px;transition:.2s;z-index:50}.toast.show{opacity:1;transform:translate(-50%,0)}
+[hidden]{display:none!important}
+@media(max-width:650px){.wrap{padding:15px 14px 34px}.hero{padding:25px 21px;border-radius:22px}.hero h1{font-size:37px;letter-spacing:-1.7px}.card{padding:17px}.head h2{font-size:22px}.head{gap:6px}.tag{font-size:9px}.row{flex-direction:column}.row .btn{width:100%}.grid{grid-template-columns:1fr}.metrics{grid-template-columns:repeat(2,minmax(0,1fr))}.tabs{margin-left:-1px;margin-right:-1px}.tab{padding:11px 13px;font-size:11px}footer{flex-direction:column}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header><div class="brand">CREATOR TOOLKIT<small>INTELLIGENCE STUDIO</small></div><span class="status">● INSTAGRAM FIRST</span></header>
+<section class="hero">
+<div class="eyebrow">A clearer way to create</div>
+<h1>Make your next idea<br><em>your strongest one.</em></h1>
+<p>An Instagram-first workspace to study public Reels, understand your own performance, and turn creative patterns into original content.</p>
+<div class="principle"><small>THE CREATOR PRINCIPLE / 001</small>Study the pattern.<br>Never copy the person.</div>
+</section>
+<nav class="tabs" aria-label="Workspace sections">
+<button class="tab" type="button" data-page="analyzer" aria-selected="true" onclick="showPage('analyzer')">⌕ Video intelligence</button>
+<button class="tab" type="button" data-page="public" aria-selected="false" onclick="showPage('public')">◎ Public Reel Analyzer</button>
+<button class="tab" type="button" data-page="insights" aria-selected="false" onclick="showPage('insights')">▥ My Instagram Insights</button>
+<button class="tab" type="button" data-page="strategy" aria-selected="false" onclick="showPage('strategy')">✳ Strategy studio</button>
+<button class="tab" type="button" data-page="script" aria-selected="false" onclick="showPage('script')">▤ Script architect</button>
+<button class="tab" type="button" data-page="growth" aria-selected="false" onclick="showPage('growth')">↗ Growth planner</button>
+</nav>
+<main>
+<section class="page is-active" id="page-analyzer">
+<div class="head"><div><div class="kicker">01 / Research</div><h2>Video intelligence</h2><p>Recognise a source link and build a creative brief.</p></div><span class="tag">RESEARCH</span></div>
+<div class="card"><h3>Source video</h3><p>Paste a public video URL from a supported platform.</p><label class="label" for="sourceUrl">Video URL</label><div class="row"><input id="sourceUrl" type="url" placeholder="YouTube, Instagram, TikTok or Facebook link"><button class="btn" type="button" onclick="analyseSource()">Analyse source ↗</button></div><div class="btns"><button class="btn secondary" type="button" onclick="sampleSource()">Explore a sample report</button></div><div id="sourceMessage" class="note">This MVP validates the link and creates an illustrative creative brief. It does not fetch live metrics or hidden metadata.</div></div>
+<div id="sourceReport" class="card" hidden><h3 id="sourceTitle">Creative brief</h3><div class="metrics"><div class="metric"><b id="sourcePlatform">—</b><span>Platform</span></div><div class="metric"><b>Not fetched</b><span>Views</span></div><div class="metric"><b>Not fetched</b><span>Likes</span></div><div class="metric"><b>API needed</b><span>Private insights</span></div></div><div class="grid"><article class="tile"><b>Story structure</b><p>Hook → setup → escalation → payoff. Validate this against the actual video.</p></article><article class="tile"><b>Creative direction</b><p>Study the broad format, then create a distinct premise, voice and execution.</p></article></div></div>
+</section>
+<section class="page" id="page-public" hidden>
+<div class="head"><div><div class="kicker">02 / Instagram research</div><h2>Public Reel Analyzer</h2><p>Preview a public Reel and turn your observations into a useful creative brief.</p></div><span class="tag">PUBLIC CONTENT</span></div>
+<div class="card"><h3>Load a public Instagram Reel</h3><label class="label" for="reelUrl">Public Reel URL</label><div class="row"><input id="reelUrl" type="url" placeholder="https://www.instagram.com/reel/…"><button class="btn" type="button" onclick="loadReel()">Load Reel ↗</button></div><div id="reelStatus" class="note" aria-live="polite">Only public posts with embedding enabled may display. Private posts and Stories are not supported.</div><div id="reelEmbed" style="margin-top:14px" hidden></div></div>
+<div class="card"><h3>Build the creative breakdown</h3><p>Because public links do not expose private insights, add visible details or your own observations.</p><label class="label" for="reelCaption">Caption / on-screen text</label><textarea id="reelCaption" rows="3" placeholder="Paste the visible caption or on-screen text…"></textarea><label class="label" for="reelNotes">What happens in the Reel?</label><textarea id="reelNotes" rows="3" placeholder="Describe the opening, key moments, editing and ending…"></textarea><div class="grid"><div><label class="label" for="reelNiche">Your niche</label><input id="reelNiche" placeholder="Indian entertainment / comedy"></div><div><label class="label" for="reelAudience">Target audience</label><input id="reelAudience" placeholder="Hindi-speaking young adults"></div></div><div class="btns"><button class="btn" type="button" onclick="buildReelBrief()">Build creative breakdown ↗</button><button class="btn outline" type="button" onclick="clearReel()">Clear</button></div><div id="reelBrief" class="grid" style="margin-top:14px"></div><div class="note"><strong>Honest data:</strong> This tool does not scrape public views, likes, comments, hidden hashtags or transcripts. Instagram embed is for display, not analytics.</div></div>
+</section>
+<section class="page" id="page-insights" hidden>
+<div class="head"><div><div class="kicker">03 / Your Instagram</div><h2>My Instagram Insights</h2><p>Add your profile now; connect an eligible professional account when the Meta backend is configured.</p></div><span class="tag">PRIVATE WORKSPACE</span></div>
+<div class="card"><h3>Add your Instagram profile</h3><p>This saves a username in this browser. It does not log in or fetch account data.</p><label class="label" for="profileName">Instagram username</label><div class="row"><input id="profileName" type="text" autocomplete="off" placeholder="@yourusername"><button class="btn" type="button" onclick="addProfile()">Add profile</button></div><div id="profileArea" style="margin-top:14px"></div></div>
+<div class="card"><h3>Connect your Creator / Business account</h3><p>Official Meta authorisation will be used. Never enter your Instagram password into this website.</p><div class="btns"><button class="btn" type="button" onclick="connectInfo()">Connect Instagram account ↗</button><button class="btn outline" type="button" onclick="requirements()">What is required?</button></div><div id="connectMessage" class="note">Not connected. Secure backend and Meta developer configuration are required before login can be activated.</div></div>
+<div class="card"><h3>Performance overview</h3><div class="metrics"><div class="metric"><b>—</b><span>Followers</span></div><div class="metric"><b>—</b><span>Accounts reached</span></div><div class="metric"><b>—</b><span>Views</span></div><div class="metric"><b>—</b><span>Interactions</span></div></div><div class="empty">No account connected. Real insights will appear here after Meta authorisation and backend integration.</div></div>
+</section>
+<section class="page" id="page-strategy" hidden>
+<div class="head"><div><div class="kicker">04 / Direction</div><h2>Strategy studio</h2><p>Turn a rough idea into a clear creative direction.</p></div><span class="tag">PLAN</span></div>
+<div class="card"><h3>Define your creative brief</h3><label class="label" for="strategyTopic">Topic or niche</label><input id="strategyTopic" placeholder="e.g. A funny day in Bareilly"><div class="grid"><div><label class="label" for="strategyFormat">Format</label><select id="strategyFormat"><option>Comedy sketch</option><option>Personality-led vlog</option><option>Challenge</option><option>Storytime</option><option>Tutorial</option><option>Transformation</option></select></div><div><label class="label" for="strategyAudience">Target audience</label><input id="strategyAudience" placeholder="Hindi-speaking young audience"></div></div><div class="btns"><button class="btn" type="button" onclick="makeStrategy()">Generate strategy ↗</button></div><div id="strategyResult" class="grid" style="margin-top:14px"></div></div>
+</section>
+<section class="page" id="page-script" hidden>
+<div class="head"><div><div class="kicker">05 / Production</div><h2>Script architect</h2><p>Create an original Reel blueprint with a hook, build and payoff.</p></div><span class="tag">CREATE</span></div>
+<div class="card"><h3>Build an original script</h3><label class="label" for="scriptIdea">Your idea</label><input id="scriptIdea" placeholder="What do you want to make a Reel about?"><div class="grid"><div><label class="label" for="scriptDuration">Duration</label><select id="scriptDuration"><option value="30">30 seconds</option><option value="45">45 seconds</option><option value="60">60 seconds</option><option value="90">90 seconds</option></select></div><div><label class="label" for="scriptTone">Tone</label><select id="scriptTone"><option>Funny and relatable</option><option>Energetic and entertaining</option><option>Cinematic and emotional</option><option>Bold and dramatic</option></select></div></div><div class="btns"><button class="btn" type="button" onclick="makeScript()">Generate script ↗</button><button class="btn outline" type="button" onclick="copyScript()">Copy script</button></div><div id="scriptResult" class="output" hidden></div></div>
+</section>
+<section class="page" id="page-growth" hidden>
+<div class="head"><div><div class="kicker">06 / Consistency</div><h2>Growth planner</h2><p>Build a practical 30-day improvement rhythm.</p></div><span class="tag">GROW</span></div>
+<div class="card"><h3>Choose your focus</h3><label class="label" for="growthGoal">Primary objective</label><select id="growthGoal"><option>Improve Reel retention</option><option>Grow engaged followers</option><option>Get more shares and saves</option><option>Build a recognisable creator brand</option><option>Attract brand collaborations</option></select><label class="label" for="growthCadence">Posting capacity</label><select id="growthCadence"><option>2 Reels per week</option><option>3–4 Reels per week</option><option>5–7 Reels per week</option></select><div class="btns"><button class="btn" type="button" onclick="makeGrowthPlan()">Create 30-day plan ↗</button></div><div id="growthResult" class="grid" style="margin-top:14px"></div></div>
+</section>
+</main>
+<footer><span>CREATOR TOOLKIT / INTELLIGENCE STUDIO</span><span>OPEN-SOURCE MVP · BUILT FOR ORIGINAL CREATIVITY</span></footer>
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script>
+(function(){
+'use strict';
+var activePage='analyzer',scriptText='';
+function byId(id){return document.getElementById(id)}
+function notify(message){var t=byId('toast');t.textContent=message;t.classList.add('show');window.clearTimeout(notify.timer);notify.timer=window.setTimeout(function(){t.classList.remove('show')},2400)}
+window.showPage=function(name){
+  var target=byId('page-'+name);
+  if(!target){notify('This section could not be found.');return}
+  var pages=document.querySelectorAll('.page');
+  for(var i=0;i<pages.length;i++){pages[i].classList.remove('is-active');pages[i].hidden=true}
+  target.hidden=false;target.classList.add('is-active');activePage=name;
+  var tabs=document.querySelectorAll('.tab');
+  for(var j=0;j<tabs.length;j++){
+    var selected=tabs[j].getAttribute('data-page')===name;
+    tabs[j].setAttribute('aria-selected',selected?'true':'false');
+    if(selected){try{tabs[j].scrollIntoView({behavior:'smooth',block:'nearest',inline:'center'})}catch(e){}}
+  }
+};
+function esc(s){return String(s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
+function tile(title,body){return '<article class="tile"><b>'+esc(title)+'</b><p>'+esc(body)+'</p></article>'}
+window.analyseSource=function(sample){
+  var raw=byId('sourceUrl').value.trim(),host='Sample';
+  if(!sample){if(!raw){byId('sourceMessage').textContent='Paste a video link first.';return}try{var u=new URL(raw);host=u.hostname.toLowerCase();if(!/(youtube\.com|youtu\.be|instagram\.com|tiktok\.com|facebook\.com|fb\.watch)/.test(host)){byId('sourceMessage').textContent='Please use a YouTube, Instagram, TikTok or Facebook link.';return}}catch(e){byId('sourceMessage').textContent='That URL does not look valid. Please check it.';return}}
+  byId('sourcePlatform').textContent=sample?'Sample':host.indexOf('instagram')>-1?'Instagram':host.indexOf('youtube')>-1||host.indexOf('youtu.be')>-1?'YouTube':host.indexOf('tiktok')>-1?'TikTok':'Facebook';
+  byId('sourceTitle').textContent=sample?'Sample creative brief':'Link recognised · creative brief';
+  byId('sourceReport').hidden=false;byId('sourceMessage').textContent='Link recognised. Live views, likes, comments and metadata have not been fetched.';
+};
+window.sampleSource=function(){window.analyseSource(true)};
+window.loadReel=function(){
+  var raw=byId('reelUrl').value.trim(),link;
+  try{var u=new URL(raw);var host=u.hostname.toLowerCase().replace(/^www\./,'');if(host!=='instagram.com'&&!host.endsWith('.instagram.com'))throw 0;if(!/^\/(reel|p|tv)\/[A-Za-z0-9_-]+/.test(u.pathname))throw 0;link='https://www.instagram.com'+u.pathname.replace(/\/?$/,'/')}
+  catch(e){byId('reelStatus').textContent='Enter a valid public Instagram Reel URL.';byId('reelEmbed').hidden=true;return}
+  byId('reelStatus').textContent='Requesting Instagram embed. Private posts or posts with embeds disabled may not display.';
+  var wrap=byId('reelEmbed');wrap.hidden=false;wrap.innerHTML='';
+  var block=document.createElement('blockquote');block.className='instagram-media';block.setAttribute('data-instgrm-permalink',link);block.setAttribute('data-instgrm-version','14');block.style.cssText='max-width:540px;width:100%;margin:auto;background:#fff;border:0';wrap.appendChild(block);
+  var embed=document.getElementById('ig-embed-script');
+  if(!embed){embed=document.createElement('script');embed.id='ig-embed-script';embed.async=true;embed.src='https://www.instagram.com/embed.js';document.body.appendChild(embed);embed.onload=function(){if(window.instgrm&&window.instgrm.Embeds)window.instgrm.Embeds.process()}}
+  else if(window.instgrm&&window.instgrm.Embeds){window.instgrm.Embeds.process()}
+};
+window.buildReelBrief=function(){
+  var caption=byId('reelCaption').value.trim(),notes=byId('reelNotes').value.trim(),niche=byId('reelNiche').value.trim()||'your niche',audience=byId('reelAudience').value.trim()||'your audience';
+  if(!caption&&!notes){byId('reelBrief').innerHTML='<div class="empty">Add the caption or describe what happens in the Reel first.</div>';return}
+  var words=(caption+' '+notes).toLowerCase(),hook=/why|how|secret|mistake|challenge|before|after|wait|truth/.test(words)?'The supplied text points to curiosity or transformation. Make that promise clear in the first seconds.':'Find the most surprising visual or strongest audience question and open with it.';
+  var beats=notes.split(/[.!?\n]+/).map(function(x){return x.trim()}).filter(Boolean).slice(0,3);
+  var items=[['Opening hook',hook],['Story arc',beats.length?beats.join(' → ')+' — arrange as setup, development and payoff.':'Write down the setup, key change and payoff visible in the Reel.'],['Audience fit','For '+audience+', clarify why this moment matters and what viewers should feel or learn.'],['Original adaptation','For '+niche+', keep only the broad storytelling principle. Change premise, footage, wording and point of view.'],['Caption keywords',caption?'Identify 3–5 natural topic phrases; avoid unrelated hashtag stuffing.':'Add a caption to identify relevant topic phrases.'],['What to measure','Use your own Insights for reach, watch time, shares, saves and interactions. Public links do not reveal private metrics.']];
+  byId('reelBrief').innerHTML=items.map(function(x){return tile(x[0],x[1])}).join('');
+};
+window.clearReel=function(){['reelUrl','reelCaption','reelNotes','reelNiche','reelAudience'].forEach(function(id){byId(id).value='' });byId('reelBrief').innerHTML='';byId('reelEmbed').innerHTML='';byId('reelEmbed').hidden=true;byId('reelStatus').textContent='Only public posts with embedding enabled may display.'};
+window.addProfile=function(){
+  var raw=byId('profileName').value.trim().replace(/^@+/,'');
+  if(!/^[A-Za-z0-9._]{1,30}$/.test(raw)){notify('Enter a valid Instagram username.');return}
+  var username='@'+raw;
+  try{localStorage.setItem('creatorToolkitProfile',username)}catch(e){}
+  renderProfile(username);notify('Profile added to this browser.');
+};
+function renderProfile(username){
+  byId('profileArea').innerHTML='<div class="tile profile"><div class="avatar">◎</div><div class="profile-info"><b>'+esc(username)+'</b><small>Saved profile · not connected to Meta</small></div><button class="btn outline" type="button" onclick="removeProfile()">Remove</button></div>';
+  byId('profileName').value=username;
+}
+window.removeProfile=function(){try{localStorage.removeItem('creatorToolkitProfile')}catch(e){}byId('profileArea').innerHTML='';byId('profileName').value='';notify('Saved profile removed.')};
+window.connectInfo=function(){byId('connectMessage').innerHTML='<strong>Connection is not active yet.</strong> A Meta developer app, Instagram Login permissions, an HTTPS redirect URL and a secure backend are required. Never paste your Instagram password here.'};
+window.requirements=function(){byId('connectMessage').innerHTML='<strong>Required setup:</strong><ol><li>Meta developer app with Instagram API / Instagram Login configured.</li><li>Eligible Creator or Business account and required permissions.</li><li>Secure backend for OAuth, token exchange, storage and refresh.</li><li>Approved redirect URL and any required Meta app review.</li></ol>Keep app secrets and access tokens off GitHub Pages.'};
+window.makeStrategy=function(){
+  var topic=byId('strategyTopic').value.trim();if(!topic){byId('strategyResult').innerHTML='<div class="empty">Add a topic first.</div>';return}
+  var format=byId('strategyFormat').value,audience=byId('strategyAudience').value.trim()||'your intended audience';
+  var items=[['The opening','Start with a visual result, a precise question or a moment of tension.'],['The promise','Make the value clear to '+audience+' within the first few seconds.'],['Story shape',format+': setup → escalation or discovery → payoff.'],['Packaging','Choose a clear cover frame and a specific caption that accurately reflects the Reel.'],['Conversation','End with one natural question related to '+topic+'.'],['Learning loop','Review retention, shares, saves and comments. Test one creative variable at a time.']];
+  byId('strategyResult').innerHTML=items.map(function(x){return tile(x[0],x[1])}).join('');
+};
+window.makeScript=function(){
+  var idea=byId('scriptIdea').value.trim();if(!idea){byId('scriptResult').hidden=false;byId('scriptResult').textContent='Add your idea first.';return}
+  var d=Number(byId('scriptDuration').value),tone=byId('scriptTone').value;
+  scriptText='CREATOR TOOLKIT / ORIGINAL REEL BLUEPRINT\n\nIDEA: '+idea+'\nTONE: '+tone+'\nLENGTH: '+d+' seconds\n\n00–03s / HOOK\nOpen on the most intriguing visual or a question the Reel will genuinely answer.\n\n03–'+Math.round(d*.22)+'s / SETUP\nExplain the premise and what is at stake.\n\n'+Math.round(d*.22)+'–'+Math.round(d*.72)+'s / BUILD\nShow two or three meaningful attempts, discoveries or obstacles. Every beat should add information, emotion or tension.\n\n'+Math.round(d*.72)+'–'+Math.round(d*.9)+'s / PAYOFF\nReveal the result and close the loop opened by the hook.\n\nFINAL BEAT / INVITATION\nAsk one specific question that naturally belongs to the story.\n\nMake the premise, footage and wording your own. This is a creative starting point, not a promise of virality.';
+  byId('scriptResult').hidden=false;byId('scriptResult').textContent=scriptText;
+};
+window.copyScript=function(){if(!scriptText){notify('Generate a script first.');return}if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(scriptText).then(function(){notify('Script copied.')}).catch(function(){notify('Select the script text to copy.')})}else{notify('Select the script text to copy.')}};
+window.makeGrowthPlan=function(){
+  var goal=byId('growthGoal').value,cadence=byId('growthCadence').value;
+  var items=[['30-day objective',goal+'. Pick one baseline metric and review it weekly.'],['Publishing rhythm',cadence+'. Keep the schedule sustainable and protect quality.'],['Retention craft','Open with a strong moment. Remove slow introductions and study where viewers leave.'],['Community habit','Reply to thoughtful comments and turn repeated audience questions into new Reels.'],['Weekly scorecard','Track reach, watch time, completion, shares, saves and meaningful interactions.'],['One experiment','Test one change at a time: hook, pacing, length, cover or topic angle.']];
+  byId('growthResult').innerHTML=items.map(function(x){return tile(x[0],x[1])}).join('');
+};
+document.addEventListener('DOMContentLoaded',function(){
+  var saved='';try{saved=localStorage.getItem('creatorToolkitProfile')||''}catch(e){}
+  if(saved)renderProfile(saved);
+  // Ensure the first page is the only visible page on every fresh load.
+  window.showPage('analyzer');
+});
+})();
+</script>
+</body>
+</html>

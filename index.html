@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="A free, simple workspace for social media creators to plan captions, hashtags, reel ideas and content.">
+  <meta name="theme-color" content="#f7f8fc">
+  <title>Creator Toolkit — Your Content Workspace</title>
+  <style>
+    :root {
+      --bg: #f7f8fc; --surface: #fff; --ink: #182033; --muted: #70798d;
+      --line: #e8ebf2; --brand: #6558e8; --brand-soft: #efedff;
+      --green: #168765; --shadow: 0 12px 35px rgba(30, 39, 70, .07);
+      --radius: 18px;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--bg); color: var(--ink); font: 15px/1.55 Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    button, input, textarea, select { font: inherit; }
+    button { cursor: pointer; }
+    .shell { max-width: 1180px; margin: 0 auto; padding: 28px 22px 60px; }
+    header { display: flex; justify-content: space-between; align-items: center; gap: 16px; margin-bottom: 34px; }
+    .brand { display: flex; align-items: center; gap: 12px; font-weight: 800; font-size: 19px; letter-spacing: -.5px; }
+    .logo { display: grid; place-items: center; width: 42px; height: 42px; color: #fff; border-radius: 13px; background: linear-gradient(135deg,#7669f4,#5144d6); box-shadow: 0 8px 18px #6558e844; }
+    .tag { color: var(--muted); background: #fff; border: 1px solid var(--line); padding: 7px 12px; border-radius: 99px; font-size: 12px; font-weight: 650; }
+    .hero { display: flex; justify-content: space-between; align-items: end; gap: 20px; margin-bottom: 25px; }
+    .eyebrow { color: var(--brand); font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; }
+    h1 { margin: 6px 0 8px; font-size: clamp(29px,5vw,43px); line-height: 1.1; letter-spacing: -1.8px; }
+    .sub { color: var(--muted); margin: 0; max-width: 620px; }
+    .hero-note { color: var(--muted); font-size: 12px; white-space: nowrap; }
+    .stats { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; margin-bottom: 24px; }
+    .stat, .panel, .tool-card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); }
+    .stat { padding: 17px 19px; }
+    .stat strong { display: block; font-size: 23px; letter-spacing: -.8px; }
+    .stat span { color: var(--muted); font-size: 12px; }
+    .layout { display: grid; grid-template-columns: 220px minmax(0,1fr); gap: 20px; align-items: start; }
+    nav { padding: 10px; position: sticky; top: 16px; }
+    .nav-label { color: #9aa1b0; font-size: 10px; font-weight: 800; letter-spacing: 1.3px; padding: 10px 10px 7px; }
+    .nav-btn { width: 100%; border: 0; background: transparent; color: #626c80; text-align: left; padding: 11px 12px; border-radius: 11px; font-weight: 650; display: flex; gap: 10px; align-items: center; margin: 2px 0; }
+    .nav-btn:hover, .nav-btn.active { background: var(--brand-soft); color: var(--brand); }
+    .nav-foot { margin: 18px 9px 7px; padding-top: 15px; border-top: 1px solid var(--line); color: var(--muted); font-size: 11px; }
+    main { min-width: 0; }
+    .tool-view { display: none; }
+    .tool-view.active { display: block; }
+    .panel { padding: 23px; }
+    .panel-head { display: flex; justify-content: space-between; align-items: start; gap: 14px; margin-bottom: 20px; }
+    h2 { margin: 0 0 4px; font-size: 20px; letter-spacing: -.5px; }
+    .hint { margin: 0; color: var(--muted); font-size: 13px; }
+    .pill { color: var(--brand); background: var(--brand-soft); border-radius: 99px; padding: 5px 9px; font-size: 11px; font-weight: 750; }
+    label { display: block; font-size: 12px; font-weight: 750; margin: 15px 0 7px; color: #475168; }
+    input, textarea, select { width: 100%; border: 1px solid #e1e5ee; background: #fbfcff; color: var(--ink); padding: 12px 13px; border-radius: 11px; outline: none; }
+    input:focus, textarea:focus, select:focus { border-color: #aaa2ff; box-shadow: 0 0 0 3px #6558e815; }
+    textarea { min-height: 105px; resize: vertical; }
+    .row { display: grid; grid-template-columns: 1fr 1fr; gap: 13px; }
+    .actions { display: flex; gap: 9px; flex-wrap: wrap; margin-top: 16px; }
+    .btn { border: 0; border-radius: 10px; padding: 10px 15px; background: var(--brand); color: white; font-weight: 750; font-size: 13px; }
+    .btn:hover { filter: brightness(.96); transform: translateY(-1px); }
+    .btn.secondary { color: #4f5870; background: #f0f2f7; }
+    .btn.ghost { background: white; border: 1px solid var(--line); color: #596278; }
+    .output { margin-top: 18px; border: 1px solid #e7e5ff; background: #faf9ff; border-radius: 13px; padding: 16px; min-height: 70px; white-space: pre-wrap; overflow-wrap: anywhere; }
+    .output-title { color: var(--brand); font-size: 10px; font-weight: 850; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 7px; }
+    .empty { color: #9299a9; font-size: 13px; }
+    .idea-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 12px; margin-top: 18px; }
+    .idea { background: #fbfcff; border: 1px solid var(--line); border-radius: 13px; padding: 15px; }
+    .idea small { color: var(--brand); font-weight: 800; font-size: 10px; text-transform: uppercase; letter-spacing: .8px; }
+    .idea p { margin: 7px 0 0; font-weight: 650; }
+    .calendar-form { display: grid; grid-template-columns: 1fr 1fr auto; gap: 10px; align-items: end; }
+    .calendar-form label { margin-top: 0; }
+    .calendar-list { display: grid; gap: 9px; margin-top: 18px; }
+    .calendar-item { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 13px 14px; border: 1px solid var(--line); border-radius: 12px; background: #fcfcff; }
+    .calendar-item strong { display: block; font-size: 13px; }
+    .calendar-item span { color: var(--muted); font-size: 11px; }
+    .delete { border: 0; background: #fff0f0; color: #c34d58; border-radius: 8px; padding: 6px 9px; font-size: 11px; font-weight: 750; }
+    .hashtag-list { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+    .hashtag { border: 1px solid #e6e3ff; color: #5c50d7; background: #f5f3ff; padding: 7px 10px; border-radius: 99px; font-size: 12px; }
+    footer { text-align: center; color: #9aa1b0; font-size: 11px; margin-top: 28px; }
+    @media (max-width: 760px) {
+      .shell { padding: 18px 14px 40px; } header { margin-bottom: 25px; }
+      .hero { display: block; } .hero-note { margin-top: 12px; }
+      .layout { grid-template-columns: 1fr; gap: 12px; }
+      nav { position: static; display: flex; overflow-x: auto; gap: 4px; padding: 7px; }
+      .nav-label, .nav-foot { display: none; }
+      .nav-btn { width: auto; white-space: nowrap; padding: 10px 12px; }
+      .stats { gap: 8px; } .stat { padding: 13px; } .stat strong { font-size: 19px; }
+      .panel { padding: 17px; } .row, .idea-grid { grid-template-columns: 1fr; }
+      .calendar-form { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <header>
+      <div class="brand"><div class="logo">✦</div><span>Creator Toolkit</span></div>
+      <span class="tag">FREE CREATOR WORKSPACE</span>
+    </header>
+
+    <section class="hero">
+      <div>
+        <div class="eyebrow">Your content, more organized</div>
+        <h1>Create with clarity.</h1>
+        <p class="sub">A simple workspace to shape ideas, organize hashtags and plan what to publish next.</p>
+      </div>
+      <div class="hero-note">No account needed · Your plans stay in this browser</div>
+    </section>
+
+    <section class="stats" aria-label="Workspace summary">
+      <div class="stat"><strong id="ideaCount">12</strong><span>Starter reel prompts</span></div>
+      <div class="stat"><strong id="postCount">0</strong><span>Planned posts</span></div>
+      <div class="stat"><strong>100%</strong><span>Free to use</span></div>
+    </section>
+
+    <div class="layout">
+      <nav class="panel" aria-label="Main tools">
+        <div class="nav-label">WORKSPACE</div>
+        <button class="nav-btn active" data-view="captions">✍️ <span>Caption Studio</span></button>
+        <button class="nav-btn" data-view="hashtags">#️⃣ <span>Hashtag Organizer</span></button>
+        <button class="nav-btn" data-view="ideas">💡 <span>Reel Ideas</span></button>
+        <button class="nav-btn" data-view="calendar">🗓️ <span>Content Calendar</span></button>
+        <div class="nav-foot">Built for creators, by creators.<br>Keep showing up.</div>
+      </nav>
+
+      <main>
+        <section class="tool-view active" id="captions">
+          <div class="panel">
+            <div class="panel-head"><div><h2>Caption Studio</h2><p class="hint">Turn a post topic into a caption starting point.</p></div><span class="pill">01 / WRITE</span></div>
+            <label for="captionTopic">What is your post about?</label>
+            <input id="captionTopic" placeholder="e.g. A behind-the-scenes day of filming">
+            <div class="row">
+              <div><label for="captionTone">Tone</label><select id="captionTone"><option value="relatable">Relatable</option><option value="funny">Funny</option><option value="inspiring">Inspirational</option><option value="professional">Professional</option><option value="bold">Bold and confident</option></select></div>
+              <div><label for="captionPlatform">Platform</label><select id="captionPlatform"><option>Instagram</option><option>YouTube</option><option>Facebook</option><option>LinkedIn</option></select></div>
+            </div>
+            <div class="actions"><button class="btn" id="makeCaption">Create caption</button><button class="btn secondary" id="clearCaption">Clear</button></div>
+            <div class="output" aria-live="polite"><div class="output-title">Your draft</div><div id="captionOutput" class="empty">Your caption draft will appear here. Edit it to make it sound like you.</div></div>
+            <div class="actions"><button class="btn ghost" id="copyCaption">Copy caption</button></div>
+          </div>
+        </section>
+
+        <section class="tool-view" id="hashtags">
+          <div class="panel">
+            <div class="panel-head"><div><h2>Hashtag Organizer</h2><p class="hint">Build a relevant starter set around your content topic.</p></div><span class="pill">02 / ORGANIZE</span></div>
+            <label for="hashtagTopic">Enter a topic or niche</label>
+            <input id="hashtagTopic" placeholder="e.g. fitness, fashion, travel, comedy">
+            <div class="actions"><button class="btn" id="makeHashtags">Build hashtag set</button></div>
+            <div class="output"><div class="output-title">Suggested tags</div><div id="hashtagOutput" class="empty">Add a topic to create a starter list. Check each tag for relevance before posting.</div></div>
+            <div class="actions"><button class="btn ghost" id="copyHashtags">Copy hashtags</button></div>
+          </div>
+        </section>
+
+        <section class="tool-view" id="ideas">
+          <div class="panel">
+            <div class="panel-head"><div><h2>Reel Ideas</h2><p class="hint">A prompt library to help you get past the blank page.</p></div><span class="pill">03 / IDEATE</span></div>
+            <label for="ideaNiche">Choose your content niche</label>
+            <select id="ideaNiche"><option value="all">All niches</option><option value="lifestyle">Lifestyle</option><option value="comedy">Comedy</option><option value="fashion">Fashion</option><option value="education">Education</option><option value="behind">Behind the scenes</option></select>
+            <div class="actions"><button class="btn" id="refreshIdeas">Show me ideas</button></div>
+            <div class="idea-grid" id="ideaOutput"></div>
+          </div>
+        </section>
+
+        <section class="tool-view" id="calendar">
+          <div class="panel">
+            <div class="panel-head"><div><h2>Content Calendar</h2><p class="hint">Save a simple publishing plan in this browser.</p></div><span class="pill">04 / PLAN</span></div>
+            <div class="calendar-form">
+              <div><label for="postTitle">Post idea</label><input id="postTitle" placeholder="e.g. Morning routine reel"></div>
+              <div><label for="postDate">Publish date</label><input id="postDate" type="date"></div>
+              <button class="btn" id="addPost">Add to plan</button>
+            </div>
+            <div class="calendar-list" id="calendarList"></div>
+            <p class="hint" style="margin-top:15px">Note: calendar items are saved locally in this browser using local storage. They are not uploaded to a server.</p>
+          </div>
+        </section>
+      </main>
+    </div>
+    <footer>Creator Toolkit · Open-source starter project · Made to help creators plan better</footer>
+  </div>
+
+  <script>
+    const $ = (id) => document.getElementById(id);
+    const ideas = [
+      ["lifestyle","A realistic day in my life — no perfect edits, just the real routine."],
+      ["lifestyle","Three small habits that made my week easier."],
+      ["lifestyle","Things I wish I knew before starting content creation."],
+      ["comedy","POV: You said you would make one quick reel and it took four hours."],
+      ["comedy","Expectation vs reality: a creator's filming day."],
+      ["comedy","Recreate a common comment or DM as a short skit."],
+      ["fashion","One outfit styled three different ways."],
+      ["fashion","A quick before-and-after styling transformation."],
+      ["fashion","The details that make a basic outfit look intentional."],
+      ["education","Explain one useful tip in under 30 seconds."],
+      ["education","Three beginner mistakes in your niche — and how to avoid them."],
+      ["education","Answer a question your audience asks you repeatedly."],
+      ["behind","Show the setup, bloopers and final version of your latest reel."],
+      ["behind","How I plan, shoot and edit one short-form video."],
+      ["behind","A tool or workflow that saves me time as a creator."]
+    ];
+    let currentCaption = "";
+    let currentHashtags = "";
+
+    document.querySelectorAll(".nav-btn").forEach(btn => btn.addEventListener("click", () => {
+      document.querySelectorAll(".nav-btn").forEach(b => b.classList.toggle("active", b === btn));
+      document.querySelectorAll(".tool-view").forEach(v => v.classList.toggle("active", v.id === btn.dataset.view));
+    }));
+
+    $("makeCaption").addEventListener("click", () => {
+      const topic = $("captionTopic").value.trim();
+      if (!topic) { $("captionOutput").textContent = "Please enter a post topic first."; $("captionOutput").className = "empty"; return; }
+      const tone = $("captionTone").value, platform = $("captionPlatform").value;
+      const openers = {
+        relatable: ["A little reminder from today's", "Keeping it real with this one:", "Some moments deserve a spot on the feed:"],
+        funny: ["Not saying I'm a pro, but this", "The plan was simple. The process? Not so much.", "If you know, you know:"],
+        inspiring: ["Small steps create meaningful progress.", "A reminder to keep going, even when", "Progress starts when you decide to show up:"],
+        professional: ["A quick look at", "Sharing a few thoughts on", "Here's a behind-the-scenes look at"],
+        bold: ["No shortcuts. Just showing up for", "Made with intention:", "Doing it my way:"]
+      };
+      const opener = openers[tone][Math.floor(Math.random() * openers[tone].length)];
+      currentCaption = `${opener}\n\n${topic}.\n\nWhat do you think? Share your take in the comments.\n\n#ContentCreator #CreatorCommunity`;
+      $("captionOutput").textContent = currentCaption;
+      $("captionOutput").className = "";
+    });
+    $("clearCaption").addEventListener("click", () => { $("captionTopic").value = ""; currentCaption = ""; $("captionOutput").textContent = "Your caption draft will appear here. Edit it to make it sound like you."; $("captionOutput").className = "empty"; });
+    $("copyCaption").addEventListener("click", () => copyText(currentCaption, "Create a caption first."));
+    $("makeHashtags").addEventListener("click", () => {
+      const topic = $("hashtagTopic").value.trim();
+      if (!topic) { $("hashtagOutput").textContent = "Please enter a topic first."; return; }
+      const words = topic.toLowerCase().replace(/[^a-z0-9 ]/g," ").trim().split(/\s+/).filter(Boolean);
+      const base = words.map(w => "#" + w);
+      const extras = ["#ContentCreator","#CreatorCommunity","#CreativeProcess","#SocialMediaTips","#NewPost","#ContentIdeas","#DigitalCreator"];
+      currentHashtags = [...new Set([...base, ...extras])].slice(0,10).join(" ");
+      $("hashtagOutput").innerHTML = "";
+      const wrap = document.createElement("div"); wrap.className = "hashtag-list";
+      currentHashtags.split(" ").forEach(tag => { const span = document.createElement("span"); span.className = "hashtag"; span.textContent = tag; wrap.appendChild(span); });
+      $("hashtagOutput").appendChild(wrap);
+    });
+    $("copyHashtags").addEventListener("click", () => copyText(currentHashtags, "Build a hashtag set first."));
+
+    function showIdeas() {
+      const niche = $("ideaNiche").value;
+      const pool = ideas.filter(item => niche === "all" || item[0] === niche).sort(() => Math.random() - .5).slice(0,6);
+      $("ideaOutput").innerHTML = "";
+      pool.forEach((item,i) => {
+        const card = document.createElement("div"); card.className = "idea";
+        const label = document.createElement("small"); label.textContent = item[0].replace("behind","behind the scenes");
+        const p = document.createElement("p"); p.textContent = item[1];
+        card.append(label,p); $("ideaOutput").appendChild(card);
+      });
+    }
+    $("refreshIdeas").addEventListener("click", showIdeas);
+    showIdeas();
+
+    function getPosts() {
+      try { return JSON.parse(localStorage.getItem("creatorToolkitPosts") || "[]"); }
+      catch { return []; }
+    }
+    function savePosts(posts) { localStorage.setItem("creatorToolkitPosts", JSON.stringify(posts)); }
+    function renderPosts() {
+      const posts = getPosts().sort((a,b) => a.date.localeCompare(b.date));
+      $("postCount").textContent = posts.length;
+      $("calendarList").innerHTML = "";
+      if (!posts.length) { const p = document.createElement("p"); p.className = "empty"; p.textContent = "No planned posts yet. Add your first idea above."; $("calendarList").appendChild(p); return; }
+      posts.forEach(post => {
+        const row = document.createElement("div"); row.className = "calendar-item";
+        const info = document.createElement("div"); const title = document.createElement("strong"); title.textContent = post.title;
+        const date = document.createElement("span"); date.textContent = new Date(post.date + "T00:00:00").toLocaleDateString(undefined,{day:"numeric",month:"short",year:"numeric"});
+        info.append(title,date);
+        const del = document.createElement("button"); del.className = "delete"; del.textContent = "Remove";
+        del.addEventListener("click", () => { savePosts(getPosts().filter(p => p.id !== post.id)); renderPosts(); });
+        row.append(info,del); $("calendarList").appendChild(row);
+      });
+    }
+    $("addPost").addEventListener("click", () => {
+      const title = $("postTitle").value.trim(), date = $("postDate").value;
+      if (!title || !date) { alert("Please add both a post idea and a publish date."); return; }
+      const posts = getPosts(); posts.push({id: Date.now().toString(),title,date}); savePosts(posts);
+      $("postTitle").value = ""; $("postDate").value = ""; renderPosts();
+    });
+    async function copyText(value, emptyMessage) {
+      if (!value) { alert(emptyMessage); return; }
+      try { await navigator.clipboard.writeText(value); alert("Copied to clipboard."); }
+      catch { alert("Clipboard access is unavailable. Please select and copy the text manually."); }
+    }
+    renderPosts();
+  </script>
+</body>
+</html>
